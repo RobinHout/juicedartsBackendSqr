@@ -2,23 +2,23 @@
 name: Build & Deploy .NET API to Azure
 on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with: { dotnet-version: '8.0.x' }
-      - run: dotnet publish src/MyApi/MyApi.csproj -c Release -o publish
-      - uses: actions/upload-artifact@v4
-        with: { name: api, path: publish }
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with: { name: api, path: . }
-      - uses: azure/webapps-deploy@v3
-        with:
-          app-name: YOUR_APP_SERVICE_NAME
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: .
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-dotnet@v4
+              with: { dotnet-version: "8.0.x" }
+            - run: dotnet publish juicedartsBackendSqr.csproj -c Release -o publish
+            - uses: actions/upload-artifact@v4
+              with: { name: api, path: publish }
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/download-artifact@v4
+              with: { name: api, path: . }
+            - uses: azure/webapps-deploy@v3
+              with:
+                  app-name: YOUR_APP_SERVICE_NAME
+                  publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+                  package: .
