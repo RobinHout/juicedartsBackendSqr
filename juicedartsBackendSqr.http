@@ -1,0 +1,6 @@
+@juicedartsBackendSqr_HostAddress = http://localhost:5148
+
+GET {{juicedartsBackendSqr_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
